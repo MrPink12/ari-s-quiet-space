@@ -18,14 +18,14 @@ export default {
       },
       fontSize: {
         'ari-body': ['1.0625rem', { lineHeight: '1.8', letterSpacing: '-0.01em' }],
-        'ari-heading': ['1.75rem', { lineHeight: '1.35', letterSpacing: '-0.02em', fontWeight: '300' }],
+        'ari-heading': ['1.875rem', { lineHeight: '1.3', letterSpacing: '-0.02em', fontWeight: '300' }],
         'ari-subheading': ['1.125rem', { lineHeight: '1.6', letterSpacing: '-0.01em' }],
-        'ari-small': ['0.875rem', { lineHeight: '1.6', letterSpacing: '0' }],
+        'ari-small': ['0.8125rem', { lineHeight: '1.5', letterSpacing: '0.01em' }],
         'ari-input': ['1.0625rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
       },
       maxWidth: {
         'ari': '800px',
-        'ari-narrow': '480px',
+        'ari-narrow': '440px',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -83,9 +83,9 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        'ari-subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.02)',
-        'ari-soft': '0 2px 8px -2px rgba(0, 0, 0, 0.04)',
-        'ari-focus': '0 0 0 2px hsl(210 25% 55% / 0.15)',
+        'ari-subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.03)',
+        'ari-soft': '0 4px 12px -2px rgba(0, 0, 0, 0.05)',
+        'ari-focus': '0 0 0 3px hsl(215 30% 50% / 0.12)',
       },
       transitionDuration: {
         'ari-slow': '450ms',

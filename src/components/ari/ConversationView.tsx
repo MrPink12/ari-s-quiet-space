@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Message } from "./Message";
 import { StatusIndicator } from "./StatusIndicator";
 import { Textarea } from "@/components/ui/textarea";
+import { AriLogo } from "./AriLogo";
 import { ArrowUp } from "lucide-react";
 
 interface ChatMessage {
@@ -117,22 +118,25 @@ export function ConversationView({ userName }: ConversationViewProps) {
   const canSend = inputValue.trim() && status !== "reflecting";
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col ari-wave-bg">
       {/* Header */}
-      <header className="flex-shrink-0 border-b border-border/60">
-        <div className="max-w-ari mx-auto px-8 py-5 flex items-center gap-3">
-          <div className="w-1.5 h-1.5 rounded-full bg-primary ari-presence" />
-          <span className="text-ari-small text-muted-foreground font-medium tracking-wide">
-            ARI
-          </span>
+      <header className="flex-shrink-0 ari-glass border-b border-border/30">
+        <div className="max-w-ari mx-auto px-8 py-4 flex items-center justify-between">
+          <AriLogo size="sm" showText={true} />
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-primary ari-presence" />
+            <span className="text-ari-small text-muted-foreground">
+              Connected
+            </span>
+          </div>
         </div>
       </header>
 
       {/* Messages area */}
       <main className="flex-1 overflow-y-auto">
-        <div className="max-w-ari mx-auto px-8 py-8">
+        <div className="max-w-ari mx-auto px-8 py-10">
           {/* Conversation */}
-          <div className="divide-y divide-border/40">
+          <div className="space-y-1">
             {messages.map((message) => (
               <Message
                 key={message.id}
@@ -153,8 +157,8 @@ export function ConversationView({ userName }: ConversationViewProps) {
       </main>
 
       {/* Input area */}
-      <footer className="flex-shrink-0 border-t border-border/60 bg-background">
-        <div className="max-w-ari mx-auto px-8 py-6">
+      <footer className="flex-shrink-0 ari-glass border-t border-border/30">
+        <div className="max-w-ari mx-auto px-8 py-5">
           <div className="relative">
             <Textarea
               ref={textareaRef}
@@ -164,17 +168,17 @@ export function ConversationView({ userName }: ConversationViewProps) {
               placeholder="Share what is on your mind…"
               disabled={status === "reflecting"}
               rows={1}
-              className="min-h-[56px] max-h-[160px] py-4 px-5 pr-14 text-ari-input bg-card border-border rounded-md shadow-ari-subtle resize-none transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/40 placeholder:text-muted-foreground/40 disabled:opacity-40"
+              className="min-h-[56px] max-h-[160px] py-4 px-5 pr-14 text-ari-input bg-background/50 border-border/50 rounded-lg shadow-ari-subtle resize-none transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/40 focus:bg-background/70 placeholder:text-muted-foreground/40 disabled:opacity-40"
             />
             
             {/* Send button */}
             <button
               onClick={handleSend}
               disabled={!canSend}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-md bg-primary text-primary-foreground transition-all duration-ari-medium ease-ari hover:bg-primary/90 disabled:opacity-25 disabled:cursor-not-allowed"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-primary-foreground transition-all duration-ari-medium ease-ari hover:bg-primary/90 disabled:opacity-25 disabled:cursor-not-allowed"
               aria-label="Send message"
             >
-              <ArrowUp className="w-4 h-4" strokeWidth={2} />
+              <ArrowUp className="w-4 h-4" strokeWidth={2.5} />
             </button>
           </div>
           

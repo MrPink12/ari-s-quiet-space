@@ -4,6 +4,7 @@ import { StatusIndicator } from "./StatusIndicator";
 import { Textarea } from "@/components/ui/textarea";
 import { AriLogo } from "./AriLogo";
 import { ArrowUp } from "lucide-react";
+import ariBackground from "@/assets/ari-background.jpg";
 
 interface ChatMessage {
   id: string;
@@ -118,11 +119,19 @@ export function ConversationView({ userName }: ConversationViewProps) {
   const canSend = inputValue.trim() && status !== "reflecting";
 
   return (
-    <div className="min-h-screen flex flex-col ari-wave-bg">
+    <div 
+      className="min-h-screen flex flex-col"
+      style={{
+        backgroundImage: `url(${ariBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
       {/* Header */}
-      <header className="flex-shrink-0 ari-glass border-b border-border/30">
+      <header className="flex-shrink-0 ari-glass border-b border-white/20">
         <div className="max-w-ari mx-auto px-8 py-4 flex items-center justify-between">
-          <AriLogo size="sm" showText={true} />
+          <AriLogo size="sm" variant="dark" />
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-primary ari-presence" />
             <span className="text-ari-small text-muted-foreground">
@@ -135,29 +144,31 @@ export function ConversationView({ userName }: ConversationViewProps) {
       {/* Messages area */}
       <main className="flex-1 overflow-y-auto">
         <div className="max-w-ari mx-auto px-8 py-10">
-          {/* Conversation */}
-          <div className="space-y-1">
-            {messages.map((message) => (
-              <Message
-                key={message.id}
-                content={message.content}
-                sender={message.sender}
-                isNew={message.isNew}
-              />
-            ))}
+          {/* Glass container for messages */}
+          <div className="ari-glass rounded-2xl p-6 min-h-[300px]">
+            <div className="space-y-1">
+              {messages.map((message) => (
+                <Message
+                  key={message.id}
+                  content={message.content}
+                  sender={message.sender}
+                  isNew={message.isNew}
+                />
+              ))}
+            </div>
+            
+            {/* Status indicator */}
+            {status === "reflecting" && (
+              <StatusIndicator status={status} />
+            )}
+            
+            <div ref={messagesEndRef} />
           </div>
-          
-          {/* Status indicator */}
-          {status === "reflecting" && (
-            <StatusIndicator status={status} />
-          )}
-          
-          <div ref={messagesEndRef} className="h-8" />
         </div>
       </main>
 
       {/* Input area */}
-      <footer className="flex-shrink-0 ari-glass border-t border-border/30">
+      <footer className="flex-shrink-0 ari-glass border-t border-white/20">
         <div className="max-w-ari mx-auto px-8 py-5">
           <div className="relative">
             <Textarea
@@ -168,14 +179,14 @@ export function ConversationView({ userName }: ConversationViewProps) {
               placeholder="Share what is on your mind…"
               disabled={status === "reflecting"}
               rows={1}
-              className="min-h-[56px] max-h-[160px] py-4 px-5 pr-14 text-ari-input bg-background/50 border-border/50 rounded-lg shadow-ari-subtle resize-none transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/40 focus:bg-background/70 placeholder:text-muted-foreground/40 disabled:opacity-40"
+              className="min-h-[56px] max-h-[160px] py-4 px-5 pr-14 text-ari-input bg-white/60 border-white/40 rounded-xl shadow-ari-subtle resize-none transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/30 focus:bg-white/80 placeholder:text-muted-foreground/40 disabled:opacity-40"
             />
             
             {/* Send button */}
             <button
               onClick={handleSend}
               disabled={!canSend}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-primary-foreground transition-all duration-ari-medium ease-ari hover:bg-primary/90 disabled:opacity-25 disabled:cursor-not-allowed"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-primary-foreground transition-all duration-ari-medium ease-ari hover:bg-primary/90 disabled:opacity-25 disabled:cursor-not-allowed"
               aria-label="Send message"
             >
               <ArrowUp className="w-4 h-4" strokeWidth={2.5} />
@@ -183,7 +194,7 @@ export function ConversationView({ userName }: ConversationViewProps) {
           </div>
           
           {/* Subtle guidance */}
-          <p className="mt-3 text-center text-ari-small text-muted-foreground/50">
+          <p className="mt-3 text-center text-xs text-muted-foreground/50">
             Press Enter to send · Shift+Enter for new line
           </p>
         </div>

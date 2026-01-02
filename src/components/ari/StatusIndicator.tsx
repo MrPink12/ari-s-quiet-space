@@ -1,13 +1,18 @@
+import { type Language, getTranslations } from "@/lib/i18n";
+
 interface StatusIndicatorProps {
   status: "listening" | "reflecting" | "idle";
+  language?: Language;
 }
 
-export function StatusIndicator({ status }: StatusIndicatorProps) {
+export function StatusIndicator({ status, language = "en" }: StatusIndicatorProps) {
+  const t = getTranslations(language);
+  
   if (status === "idle") return null;
 
   const statusText = {
-    listening: "ARI is listening…",
-    reflecting: "ARI is reflecting…",
+    listening: t.listening,
+    reflecting: t.reflecting,
   };
 
   return (

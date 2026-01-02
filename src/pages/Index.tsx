@@ -1,23 +1,24 @@
 import { useState } from "react";
 import { StartView } from "@/components/ari/StartView";
 import { ConversationView } from "@/components/ari/ConversationView";
+import { type Language } from "@/lib/i18n";
 
 const Index = () => {
-  const [userName, setUserName] = useState<string | null>(null);
+  const [session, setSession] = useState<{ userName: string; language: Language } | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const handleStart = (name: string) => {
+  const handleStart = (name: string, language: Language) => {
     setIsTransitioning(true);
     
     setTimeout(() => {
-      setUserName(name);
+      setSession({ userName: name, language });
     }, 350);
   };
 
-  if (userName) {
+  if (session) {
     return (
       <div className="ari-fade-in">
-        <ConversationView userName={userName} />
+        <ConversationView userName={session.userName} language={session.language} />
       </div>
     );
   }

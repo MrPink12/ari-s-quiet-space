@@ -4,6 +4,7 @@ import { StatusIndicator } from "./StatusIndicator";
 import { Textarea } from "@/components/ui/textarea";
 import { AriLogo } from "./AriLogo";
 import { ArrowUp } from "lucide-react";
+import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
 
 interface ChatMessage {
@@ -15,14 +16,17 @@ interface ChatMessage {
 
 interface ConversationViewProps {
   userName: string;
+  language: Language;
 }
 
-export function ConversationView({ userName }: ConversationViewProps) {
+export function ConversationView({ userName, language }: ConversationViewProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [status, setStatus] = useState<"listening" | "reflecting" | "idle">("idle");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  
+  const t = getTranslations(language);
 
   // Initial greeting from ARI
   useEffect(() => {
@@ -33,7 +37,7 @@ export function ConversationView({ userName }: ConversationViewProps) {
         setMessages([
           {
             id: "welcome",
-            content: `Hello, ${userName}.\n\nThis is a space where you can share whatever is on your mind. There is no right or wrong thing to say.\n\nWhat would you like to talk about?`,
+            content: t.welcome(userName),
             sender: "ari",
             isNew: true,
           },
@@ -49,7 +53,7 @@ export function ConversationView({ userName }: ConversationViewProps) {
     }, 600);
 
     return () => clearTimeout(timer);
-  }, [userName]);
+  }, [userName, t]);
 
   // Auto-scroll
   useEffect(() => {
@@ -80,17 +84,9 @@ export function ConversationView({ userName }: ConversationViewProps) {
 
     // Simulate ARI response
     setTimeout(() => {
-      const ariResponses = [
-        "Thank you for sharing that with me. It sounds like something that matters to you.",
-        "I hear you. Would you like to tell me more about how that makes you feel?",
-        "That is a meaningful thought. What comes up for you when you sit with it?",
-        "I am here with you. Take whatever time you need.",
-        "I appreciate you trusting me with that. What else is on your mind?",
-      ];
-
       const response: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        content: ariResponses[Math.floor(Math.random() * ariResponses.length)],
+        content: t.responses[Math.floor(Math.random() * t.responses.length)],
         sender: "ari",
         isNew: true,
       };
@@ -131,11 +127,11 @@ export function ConversationView({ userName }: ConversationViewProps) {
       {/* Header */}
       <header className="flex-shrink-0 ari-glass border-b border-white/20">
         <div className="max-w-ari mx-auto px-8 py-4 flex items-center justify-between">
-          <AriLogo size="sm" variant="dark" />
+          <AriLogo size="sm" variant="dark" language={language} />
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-primary ari-presence" />
             <span className="text-ari-small text-muted-foreground">
-              Connected
+              {t.connected}
             </span>
           </div>
         </div>
@@ -153,13 +149,14 @@ export function ConversationView({ userName }: ConversationViewProps) {
                   content={message.content}
                   sender={message.sender}
                   isNew={message.isNew}
+                  language={language}
                 />
               ))}
             </div>
             
             {/* Status indicator */}
             {status === "reflecting" && (
-              <StatusIndicator status={status} />
+              <StatusIndicator status={status} language={language} />
             )}
             
             <div ref={messagesEndRef} />
@@ -176,7 +173,7 @@ export function ConversationView({ userName }: ConversationViewProps) {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Share what is on your mind…"
+              placeholder={t.sendPlaceholder}
               disabled={status === "reflecting"}
               rows={1}
               className="min-h-[56px] max-h-[160px] py-4 px-5 pr-14 text-ari-input bg-white/60 border-white/40 rounded-xl shadow-ari-subtle resize-none transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/30 focus:bg-white/80 placeholder:text-muted-foreground/40 disabled:opacity-40"
@@ -195,7 +192,7 @@ export function ConversationView({ userName }: ConversationViewProps) {
           
           {/* Subtle guidance */}
           <p className="mt-3 text-center text-xs text-muted-foreground/50">
-            Press Enter to send · Shift+Enter for new line
+            {t.sendHint}
           </p>
         </div>
       </footer>

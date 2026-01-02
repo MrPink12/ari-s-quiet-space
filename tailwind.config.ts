@@ -25,7 +25,7 @@ export default {
       },
       maxWidth: {
         'ari': '800px',
-        'ari-narrow': '440px',
+        'ari-narrow': '420px',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -84,8 +84,9 @@ export default {
       },
       boxShadow: {
         'ari-subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.03)',
-        'ari-soft': '0 4px 12px -2px rgba(0, 0, 0, 0.05)',
-        'ari-focus': '0 0 0 3px hsl(215 30% 50% / 0.12)',
+        'ari-soft': '0 4px 12px -2px rgba(0, 0, 0, 0.06)',
+        'ari-medium': '0 8px 24px -4px rgba(0, 0, 0, 0.08)',
+        'ari-focus': '0 0 0 3px hsl(215 30% 50% / 0.15)',
       },
       transitionDuration: {
         'ari-slow': '450ms',

@@ -1,56 +1,99 @@
 interface AriLogoProps {
-  size?: "sm" | "md" | "lg";
-  showText?: boolean;
+  size?: "sm" | "md" | "lg" | "hero";
+  variant?: "light" | "dark";
 }
 
-export function AriLogo({ size = "md", showText = true }: AriLogoProps) {
+export function AriLogo({ size = "md", variant = "dark" }: AriLogoProps) {
   const sizes = {
-    sm: { icon: 32, dot: 4, text: "text-sm" },
-    md: { icon: 44, dot: 6, text: "text-base" },
-    lg: { icon: 64, dot: 8, text: "text-lg" },
+    sm: { width: 80, height: 32, tagline: false },
+    md: { width: 100, height: 40, tagline: false },
+    lg: { width: 140, height: 56, tagline: true },
+    hero: { width: 240, height: 96, tagline: true },
   };
 
   const s = sizes[size];
+  const color = variant === "light" ? "#FFFFFF" : "currentColor";
+  const taglineColor = variant === "light" ? "rgba(255,255,255,0.85)" : "currentColor";
 
   return (
-    <div className="flex items-center gap-3">
-      {/* Geometric A with dot */}
-      <div className="relative" style={{ width: s.icon, height: s.icon }}>
-        <svg
-          viewBox="0 0 48 48"
+    <div className="flex flex-col items-center">
+      {/* ARI Logo - geometric A with dot, followed by RI */}
+      <svg
+        viewBox="0 0 120 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{ width: s.width, height: s.height }}
+      >
+        {/* A - Triangle outline */}
+        <path
+          d="M24 4L44 44H4L24 4Z"
+          stroke={color}
+          strokeWidth="4"
+          strokeLinejoin="round"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
-        >
-          {/* Triangle A shape */}
-          <path
-            d="M24 6L42 42H6L24 6Z"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinejoin="round"
-            fill="none"
-            className="text-foreground"
-          />
-          {/* Center dot */}
-          <circle
-            cx="24"
-            cy="32"
-            r={s.dot}
-            className="text-primary fill-current"
-          />
-        </svg>
-      </div>
+        />
+        {/* Dot in A */}
+        <circle
+          cx="24"
+          cy="32"
+          r="4"
+          fill={color}
+        />
+        {/* R */}
+        <path
+          d="M54 8H68C74.6274 8 80 13.3726 80 20C80 26.6274 74.6274 32 68 32H54V8Z"
+          stroke={color}
+          strokeWidth="4"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        <path
+          d="M54 8V44"
+          stroke={color}
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+        <path
+          d="M68 32L80 44"
+          stroke={color}
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* I */}
+        <path
+          d="M92 8V44"
+          stroke={color}
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+        <path
+          d="M86 8H98"
+          stroke={color}
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+        <path
+          d="M86 44H98"
+          stroke={color}
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+      </svg>
 
-      {showText && (
-        <div className="flex flex-col">
-          <span className={`font-semibold tracking-wide text-foreground ${s.text}`}>
-            ARI
-          </span>
-          {size === "lg" && (
-            <span className="text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">
-              Adaptive Relationship Intelligence
-            </span>
-          )}
+      {/* Tagline */}
+      {s.tagline && (
+        <div 
+          className="mt-4 text-center tracking-[0.25em] uppercase"
+          style={{ 
+            color: taglineColor,
+            fontSize: size === "hero" ? "0.75rem" : "0.625rem",
+            fontWeight: 400,
+            letterSpacing: "0.25em"
+          }}
+        >
+          <div>Adaptive Relationship</div>
+          <div>Intelligence</div>
         </div>
       )}
     </div>

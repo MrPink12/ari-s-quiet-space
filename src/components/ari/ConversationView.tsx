@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ArrowLeft } from "lucide-react";
 import { StatusIndicator } from "./StatusIndicator";
 import { VoiceButton } from "./VoiceButton";
 import { AriLogo } from "./AriLogo";
@@ -10,9 +11,10 @@ type ConversationState = "ari-speaking" | "user-listening" | "user-speaking" | "
 
 interface ConversationViewProps {
   language: Language;
+  onBack?: () => void;
 }
 
-export function ConversationView({ language }: ConversationViewProps) {
+export function ConversationView({ language, onBack }: ConversationViewProps) {
   const [state, setState] = useState<ConversationState>("idle");
   const [currentText, setCurrentText] = useState("");
   
@@ -87,7 +89,18 @@ export function ConversationView({ language }: ConversationViewProps) {
       {/* Header */}
       <header className="flex-shrink-0 ari-glass border-b border-white/20">
         <div className="max-w-ari mx-auto px-8 py-4 flex items-center justify-between">
-          <AriLogo size="sm" variant="dark" language={language} />
+          <div className="flex items-center gap-4">
+            {onBack && (
+              <button
+                onClick={onBack}
+                className="p-2 rounded-full hover:bg-white/10 transition-colors duration-300"
+                aria-label="Tillbaka"
+              >
+                <ArrowLeft className="w-5 h-5 text-foreground/70" />
+              </button>
+            )}
+            <AriLogo size="sm" variant="dark" language={language} />
+          </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-primary ari-presence" />
             <span className="text-ari-small text-muted-foreground">

@@ -17,10 +17,15 @@ const Index = () => {
     }, 350);
   };
 
+  const handleBack = () => {
+    setIsStarted(false);
+    setIsTransitioning(false);
+  };
+
   if (isStarted) {
     return (
       <div className="ari-fade-in">
-        <ConversationView language={language} />
+        <ConversationView language={language} onBack={handleBack} />
       </div>
     );
   }

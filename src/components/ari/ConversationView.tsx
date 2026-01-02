@@ -4,6 +4,7 @@ import { VoiceButton } from "./VoiceButton";
 import { AriLogo } from "./AriLogo";
 import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
+import ariAvatar from "@/assets/ari-avatar.png";
 
 type ConversationState = "ari-speaking" | "user-listening" | "user-speaking" | "reflecting" | "idle";
 
@@ -97,12 +98,47 @@ export function ConversationView({ language }: ConversationViewProps) {
       </header>
 
       {/* Main conversation area */}
-      <main className="flex-1 flex flex-col items-center justify-center px-8">
-        <div className="max-w-ari-narrow w-full flex flex-col items-center">
+      <main className="flex-1 flex flex-col items-center justify-center px-8 py-8">
+        <div className="max-w-ari w-full flex flex-col items-center">
           
+          {/* Video call frame - ARI Avatar */}
+          <div className="relative mb-8 ari-fade-up">
+            {/* Outer glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-2xl blur-sm" />
+            
+            {/* Video frame container */}
+            <div className="relative ari-glass rounded-2xl p-1 shadow-xl">
+              {/* Inner frame with subtle border */}
+              <div className="relative rounded-xl overflow-hidden border border-white/20">
+                {/* Avatar image */}
+                <img 
+                  src={ariAvatar} 
+                  alt="ARI" 
+                  className="w-80 h-auto object-cover"
+                />
+                
+                {/* Live indicator overlay */}
+                <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1.5">
+                  <div className={`w-2 h-2 rounded-full ${state === "ari-speaking" ? "bg-green-400 animate-pulse" : "bg-primary"}`} />
+                  <span className="text-xs font-medium text-white/90">
+                    {state === "ari-speaking" ? "LIVE" : "ARI"}
+                  </span>
+                </div>
+                
+                {/* Bottom gradient overlay */}
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent" />
+                
+                {/* Name tag */}
+                <div className="absolute bottom-3 left-3">
+                  <span className="text-sm font-medium text-white/90">ARI</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Current spoken text display */}
           {(state === "ari-speaking" || state === "reflecting") && currentText && (
-            <div className="ari-glass rounded-2xl p-8 mb-12 text-center ari-fade-up">
+            <div className="ari-glass rounded-2xl p-6 mb-8 text-center ari-fade-up max-w-ari-narrow">
               <p className="text-ari-body text-foreground/90 leading-relaxed whitespace-pre-line">
                 {currentText}
               </p>
@@ -111,7 +147,7 @@ export function ConversationView({ language }: ConversationViewProps) {
 
           {/* Visual wave/presence indicator when ARI speaks */}
           {state === "ari-speaking" && (
-            <div className="mb-12 flex items-center gap-1">
+            <div className="mb-8 flex items-center gap-1">
               {[...Array(5)].map((_, i) => (
                 <div
                   key={i}

@@ -1,12 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { StartView } from "@/components/ari/StartView";
+import { ConversationView } from "@/components/ari/ConversationView";
 
 const Index = () => {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+  const [userName, setUserName] = useState<string | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleStart = (name: string) => {
+    setIsTransitioning(true);
+    
+    // Gentle transition to conversation
+    setTimeout(() => {
+      setUserName(name);
+    }, 400);
+  };
+
+  if (userName) {
+    return (
+      <div className="ari-fade-in">
+        <ConversationView userName={userName} />
       </div>
+    );
+  }
+
+  return (
+    <div
+      className={`transition-opacity duration-ari-slow ease-ari ${
+        isTransitioning ? "opacity-0" : "opacity-100"
+      }`}
+    >
+      <StartView onStart={handleStart} />
     </div>
   );
 };

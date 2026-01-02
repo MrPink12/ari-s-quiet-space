@@ -9,10 +9,9 @@ const Index = () => {
   const handleStart = (name: string) => {
     setIsTransitioning(true);
     
-    // Gentle transition to conversation
     setTimeout(() => {
       setUserName(name);
-    }, 400);
+    }, 350);
   };
 
   if (userName) {

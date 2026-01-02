@@ -12,18 +12,29 @@ export function Message({ content, sender, isNew = false }: MessageProps) {
   return (
     <div
       className={cn(
-        "max-w-[85%] px-5 py-4 rounded-ari-lg",
-        isNew && "ari-fade-up",
-        isAri
-          ? "self-start bg-ari-message text-foreground"
-          : "self-end bg-card text-foreground border border-border shadow-ari-soft"
+        "py-6",
+        isNew && "ari-fade-up"
       )}
       style={{
-        animationDelay: isNew ? "100ms" : "0ms",
+        animationDelay: isNew ? "50ms" : "0ms",
         animationFillMode: "backwards",
       }}
     >
-      <p className="text-ari-body leading-relaxed whitespace-pre-wrap">
+      {/* Sender label */}
+      <div className="mb-2">
+        <span className={cn(
+          "text-ari-small font-medium",
+          isAri ? "text-primary" : "text-muted-foreground"
+        )}>
+          {isAri ? "ARI" : "You"}
+        </span>
+      </div>
+      
+      {/* Message content */}
+      <p className={cn(
+        "text-ari-body leading-relaxed whitespace-pre-wrap",
+        isAri ? "text-ari-message-text" : "text-ari-user-text"
+      )}>
         {content}
       </p>
     </div>

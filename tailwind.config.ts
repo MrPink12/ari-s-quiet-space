@@ -17,9 +17,15 @@ export default {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       fontSize: {
-        'ari-body': ['1.125rem', { lineHeight: '1.75', letterSpacing: '-0.01em' }],
-        'ari-heading': ['2rem', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
-        'ari-small': ['0.9375rem', { lineHeight: '1.6', letterSpacing: '0' }],
+        'ari-body': ['1.0625rem', { lineHeight: '1.8', letterSpacing: '-0.01em' }],
+        'ari-heading': ['1.75rem', { lineHeight: '1.35', letterSpacing: '-0.02em', fontWeight: '300' }],
+        'ari-subheading': ['1.125rem', { lineHeight: '1.6', letterSpacing: '-0.01em' }],
+        'ari-small': ['0.875rem', { lineHeight: '1.6', letterSpacing: '0' }],
+        'ari-input': ['1.0625rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+      },
+      maxWidth: {
+        'ari': '800px',
+        'ari-narrow': '480px',
       },
       colors: {
         border: "hsl(var(--border))",
@@ -67,27 +73,26 @@ export default {
         },
         ari: {
           message: "hsl(var(--ari-message-bg))",
-          user: "hsl(var(--ari-user-message-bg))",
+          "message-text": "hsl(var(--ari-message-text))",
+          "user-text": "hsl(var(--ari-user-text))",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        'ari': '1rem',
-        'ari-lg': '1.25rem',
       },
       boxShadow: {
-        'ari-soft': '0 2px 12px -2px rgba(0, 0, 0, 0.04)',
-        'ari-medium': '0 4px 20px -4px rgba(0, 0, 0, 0.06)',
-        'ari-focus': '0 0 0 3px hsl(210 30% 65% / 0.2)',
+        'ari-subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.02)',
+        'ari-soft': '0 2px 8px -2px rgba(0, 0, 0, 0.04)',
+        'ari-focus': '0 0 0 2px hsl(210 25% 55% / 0.15)',
       },
       transitionDuration: {
-        'ari-slow': '500ms',
-        'ari-medium': '350ms',
+        'ari-slow': '450ms',
+        'ari-medium': '300ms',
       },
       transitionTimingFunction: {
-        'ari': 'cubic-bezier(0.4, 0, 0.2, 1)',
+        'ari': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
       },
       keyframes: {
         "accordion-down": {

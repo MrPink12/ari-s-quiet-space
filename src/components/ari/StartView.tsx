@@ -8,7 +8,6 @@ interface StartViewProps {
 
 export function StartView({ onStart }: StartViewProps) {
   const [name, setName] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,41 +17,39 @@ export function StartView({ onStart }: StartViewProps) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6">
-      <div className="w-full max-w-md space-y-12 ari-fade-up">
-        {/* ARI presence indicator */}
-        <div className="flex justify-center">
-          <div className="w-3 h-3 rounded-full bg-primary/60 ari-breathe" />
+    <div className="min-h-screen flex items-center justify-center px-8">
+      <div className="w-full max-w-ari-narrow ari-fade-up">
+        {/* Presence indicator */}
+        <div className="flex justify-center mb-16">
+          <div className="w-2 h-2 rounded-full bg-primary ari-presence" />
         </div>
 
-        {/* Welcome text */}
-        <div className="text-center space-y-4">
-          <h1 className="text-ari-heading font-light text-foreground">
-            Hello. I'm ARI.
+        {/* Welcome content */}
+        <div className="text-center mb-12">
+          <h1 className="text-ari-heading text-foreground mb-4">
+            A space for reflection.
           </h1>
-          <p className="text-ari-body text-muted-foreground leading-relaxed">
-            A space for reflection, at your pace.
+          <p className="text-ari-body text-muted-foreground">
+            Take your time. There is no rush here.
           </p>
         </div>
 
-        {/* Name input form */}
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <div className="space-y-3">
+        {/* Name input */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
             <label 
               htmlFor="name" 
-              className="block text-ari-small text-muted-foreground text-center"
+              className="block text-ari-small text-muted-foreground"
             >
-              What would you like me to call you?
+              What should I call you?
             </label>
             <Input
               id="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
               placeholder="Your name"
-              className="h-14 text-center text-ari-body bg-card border-border rounded-ari-lg shadow-ari-soft transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/30 placeholder:text-muted-foreground/50"
+              className="h-12 text-ari-input bg-card border-border rounded-md shadow-ari-subtle transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/40 placeholder:text-muted-foreground/40"
               autoComplete="off"
               autoFocus
             />
@@ -61,16 +58,11 @@ export function StartView({ onStart }: StartViewProps) {
           <Button
             type="submit"
             disabled={!name.trim()}
-            className="w-full h-14 text-ari-body font-normal rounded-ari-lg bg-primary hover:bg-primary/90 text-primary-foreground shadow-ari-soft transition-all duration-ari-medium ease-ari disabled:opacity-40 disabled:cursor-not-allowed"
+            className="w-full h-12 text-ari-input font-normal rounded-md bg-primary hover:bg-primary/90 text-primary-foreground shadow-ari-subtle transition-all duration-ari-medium ease-ari disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Begin conversation
+            Start conversation
           </Button>
         </form>
-
-        {/* Subtle footer */}
-        <p className="text-center text-sm text-muted-foreground/60">
-          Take your time. There's no rush here.
-        </p>
       </div>
     </div>
   );

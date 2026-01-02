@@ -136,14 +136,6 @@ export function ConversationView({ language }: ConversationViewProps) {
             </div>
           </div>
 
-          {/* Current spoken text display */}
-          {(state === "ari-speaking" || state === "reflecting") && currentText && (
-            <div className="ari-glass rounded-2xl p-6 mb-8 text-center ari-fade-up max-w-ari-narrow">
-              <p className="text-ari-body text-foreground/90 leading-relaxed whitespace-pre-line">
-                {currentText}
-              </p>
-            </div>
-          )}
 
           {/* Visual wave/presence indicator when ARI speaks */}
           {state === "ari-speaking" && (

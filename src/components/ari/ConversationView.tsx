@@ -1,118 +1,77 @@
-import { useState, useRef, useEffect } from "react";
-import { Message } from "./Message";
+import { useState, useEffect } from "react";
 import { StatusIndicator } from "./StatusIndicator";
-import { Textarea } from "@/components/ui/textarea";
+import { VoiceButton } from "./VoiceButton";
 import { AriLogo } from "./AriLogo";
-import { ArrowUp } from "lucide-react";
 import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
 
-interface ChatMessage {
-  id: string;
-  content: string;
-  sender: "ari" | "user";
-  isNew?: boolean;
-}
+type ConversationState = "ari-speaking" | "user-listening" | "user-speaking" | "reflecting" | "idle";
 
 interface ConversationViewProps {
-  userName: string;
   language: Language;
 }
 
-export function ConversationView({ userName, language }: ConversationViewProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [inputValue, setInputValue] = useState("");
-  const [status, setStatus] = useState<"listening" | "reflecting" | "idle">("idle");
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+export function ConversationView({ language }: ConversationViewProps) {
+  const [state, setState] = useState<ConversationState>("idle");
+  const [currentText, setCurrentText] = useState("");
   
   const t = getTranslations(language);
 
-  // Initial greeting from ARI
+  // ARI's opening prompt
   useEffect(() => {
     const timer = setTimeout(() => {
-      setStatus("reflecting");
+      setState("ari-speaking");
+      setCurrentText(t.openingPrompt);
       
+      // Simulate ARI finishing speaking
+      const speakDuration = 4000 + Math.random() * 1000;
       setTimeout(() => {
-        setMessages([
-          {
-            id: "welcome",
-            content: t.welcome(userName),
-            sender: "ari",
-            isNew: true,
-          },
-        ]);
-        setStatus("listening");
-        
-        setTimeout(() => {
-          setMessages((prev) =>
-            prev.map((msg) => ({ ...msg, isNew: false }))
-          );
-        }, 500);
-      }, 1800);
-    }, 600);
+        setState("user-listening");
+      }, speakDuration);
+    }, 800);
 
     return () => clearTimeout(timer);
-  }, [userName, t]);
+  }, [t]);
 
-  // Auto-scroll
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, status]);
-
-  // Auto-resize textarea
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 160)}px`;
-    }
-  }, [inputValue]);
-
-  const handleSend = () => {
-    if (!inputValue.trim() || status === "reflecting") return;
-
-    const userMessage: ChatMessage = {
-      id: Date.now().toString(),
-      content: inputValue.trim(),
-      sender: "user",
-      isNew: true,
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInputValue("");
-    setStatus("reflecting");
-
-    // Simulate ARI response
-    setTimeout(() => {
-      const response: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        content: t.responses[Math.floor(Math.random() * t.responses.length)],
-        sender: "ari",
-        isNew: true,
-      };
-
-      setMessages((prev) => [
-        ...prev.map((msg) => ({ ...msg, isNew: false })),
-        response,
-      ]);
-      setStatus("listening");
-
+  const handleVoiceButtonClick = () => {
+    if (state === "user-listening") {
+      // Start recording user's voice
+      setState("user-speaking");
+    } else if (state === "user-speaking") {
+      // Stop recording, ARI will reflect and respond
+      setState("reflecting");
+      
+      // Simulate ARI processing and responding
       setTimeout(() => {
-        setMessages((prev) =>
-          prev.map((msg) => ({ ...msg, isNew: false }))
-        );
-      }, 500);
-    }, 2000 + Math.random() * 1500);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
+        setState("ari-speaking");
+        setCurrentText(t.responses[Math.floor(Math.random() * t.responses.length)]);
+        
+        // After ARI speaks, go back to listening
+        const speakDuration = 3000 + Math.random() * 1500;
+        setTimeout(() => {
+          setState("user-listening");
+        }, speakDuration);
+      }, 2000 + Math.random() * 1000);
     }
   };
 
-  const canSend = inputValue.trim() && status !== "reflecting";
+  const getStatusText = () => {
+    switch (state) {
+      case "ari-speaking":
+        return t.ariSpeaking;
+      case "user-listening":
+        return t.tapToSpeak;
+      case "user-speaking":
+        return t.speaking;
+      case "reflecting":
+        return t.reflecting;
+      default:
+        return "";
+    }
+  };
+
+  const isVoiceButtonActive = state === "user-speaking";
+  const isVoiceButtonDisabled = state === "ari-speaking" || state === "reflecting";
 
   return (
     <div 
@@ -137,65 +96,57 @@ export function ConversationView({ userName, language }: ConversationViewProps) 
         </div>
       </header>
 
-      {/* Messages area */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-ari mx-auto px-8 py-10">
-          {/* Glass container for messages */}
-          <div className="ari-glass rounded-2xl p-6 min-h-[300px]">
-            <div className="space-y-1">
-              {messages.map((message) => (
-                <Message
-                  key={message.id}
-                  content={message.content}
-                  sender={message.sender}
-                  isNew={message.isNew}
-                  language={language}
+      {/* Main conversation area */}
+      <main className="flex-1 flex flex-col items-center justify-center px-8">
+        <div className="max-w-ari-narrow w-full flex flex-col items-center">
+          
+          {/* Current spoken text display */}
+          {(state === "ari-speaking" || state === "reflecting") && currentText && (
+            <div className="ari-glass rounded-2xl p-8 mb-12 text-center ari-fade-up">
+              <p className="text-ari-body text-foreground/90 leading-relaxed whitespace-pre-line">
+                {currentText}
+              </p>
+            </div>
+          )}
+
+          {/* Visual wave/presence indicator when ARI speaks */}
+          {state === "ari-speaking" && (
+            <div className="mb-12 flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="w-1 bg-primary/60 rounded-full animate-pulse"
+                  style={{
+                    height: `${20 + Math.random() * 30}px`,
+                    animationDelay: `${i * 0.15}s`,
+                    animationDuration: `${0.8 + Math.random() * 0.4}s`,
+                  }}
                 />
               ))}
             </div>
-            
-            {/* Status indicator */}
-            {status === "reflecting" && (
-              <StatusIndicator status={status} language={language} />
-            )}
-            
-            <div ref={messagesEndRef} />
-          </div>
+          )}
+
+          {/* Voice button */}
+          <VoiceButton
+            isListening={isVoiceButtonActive}
+            isDisabled={isVoiceButtonDisabled}
+            onClick={handleVoiceButtonClick}
+            size="lg"
+          />
+
+          {/* Status text */}
+          <p className="mt-6 text-ari-small text-muted-foreground/70 transition-opacity duration-ari-medium">
+            {getStatusText()}
+          </p>
+
+          {/* Reflecting indicator */}
+          {state === "reflecting" && (
+            <div className="mt-8">
+              <StatusIndicator status="reflecting" language={language} />
+            </div>
+          )}
         </div>
       </main>
-
-      {/* Input area */}
-      <footer className="flex-shrink-0 ari-glass border-t border-white/20">
-        <div className="max-w-ari mx-auto px-8 py-5">
-          <div className="relative">
-            <Textarea
-              ref={textareaRef}
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder={t.sendPlaceholder}
-              disabled={status === "reflecting"}
-              rows={1}
-              className="min-h-[56px] max-h-[160px] py-4 px-5 pr-14 text-ari-input bg-white/60 border-white/40 rounded-xl shadow-ari-subtle resize-none transition-all duration-ari-medium ease-ari focus:shadow-ari-focus focus:border-primary/30 focus:bg-white/80 placeholder:text-muted-foreground/40 disabled:opacity-40"
-            />
-            
-            {/* Send button */}
-            <button
-              onClick={handleSend}
-              disabled={!canSend}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-primary-foreground transition-all duration-ari-medium ease-ari hover:bg-primary/90 disabled:opacity-25 disabled:cursor-not-allowed"
-              aria-label="Send message"
-            >
-              <ArrowUp className="w-4 h-4" strokeWidth={2.5} />
-            </button>
-          </div>
-          
-          {/* Subtle guidance */}
-          <p className="mt-3 text-center text-xs text-muted-foreground/50">
-            {t.sendHint}
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

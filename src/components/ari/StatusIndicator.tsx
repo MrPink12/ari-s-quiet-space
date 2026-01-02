@@ -1,5 +1,7 @@
 import { type Language, getTranslations } from "@/lib/i18n";
 
+// StatusIndicator now only shows "reflecting" state
+
 interface StatusIndicatorProps {
   status: "listening" | "reflecting" | "idle";
   language?: Language;

@@ -162,18 +162,6 @@ export function ConversationView({ language }: ConversationViewProps) {
             </div>
           )}
 
-          {/* Voice button */}
-          <VoiceButton
-            isListening={isVoiceButtonActive}
-            isDisabled={isVoiceButtonDisabled}
-            onClick={handleVoiceButtonClick}
-            size="lg"
-          />
-
-          {/* Status text */}
-          <p className="mt-6 text-ari-small text-muted-foreground/70 transition-opacity duration-ari-medium">
-            {getStatusText()}
-          </p>
 
           {/* Reflecting indicator */}
           {state === "reflecting" && (

@@ -33,7 +33,7 @@ export function AriLogo({ size = "md", variant = "dark", language = "en" }: AriL
       {/* Tagline */}
       {s.tagline && (
         <div
-          className="mt-2 text-center tracking-[0.25em] uppercase"
+          className="mt-0.5 text-center tracking-[0.25em] uppercase"
           style={{ 
             color: taglineColor,
             fontSize: size === "hero" ? "0.75rem" : "0.625rem",

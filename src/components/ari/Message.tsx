@@ -1,13 +1,16 @@
 import { cn } from "@/lib/utils";
+import { type Language, getTranslations } from "@/lib/i18n";
 
 interface MessageProps {
   content: string;
   sender: "ari" | "user";
   isNew?: boolean;
+  language?: Language;
 }
 
-export function Message({ content, sender, isNew = false }: MessageProps) {
+export function Message({ content, sender, isNew = false, language = "en" }: MessageProps) {
   const isAri = sender === "ari";
+  const t = getTranslations(language);
 
   return (
     <div
@@ -29,7 +32,7 @@ export function Message({ content, sender, isNew = false }: MessageProps) {
           "text-ari-small font-medium tracking-wide",
           isAri ? "text-primary" : "text-muted-foreground"
         )}>
-          {isAri ? "ARI" : "You"}
+          {isAri ? t.ariLabel : t.youLabel}
         </span>
       </div>
       

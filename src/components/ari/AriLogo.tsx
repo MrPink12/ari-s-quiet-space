@@ -1,9 +1,12 @@
+import { type Language, getTranslations } from "@/lib/i18n";
+
 interface AriLogoProps {
   size?: "sm" | "md" | "lg" | "hero";
   variant?: "light" | "dark";
+  language?: Language;
 }
 
-export function AriLogo({ size = "md", variant = "dark" }: AriLogoProps) {
+export function AriLogo({ size = "md", variant = "dark", language = "en" }: AriLogoProps) {
   const sizes = {
     sm: { width: 80, height: 32, tagline: false },
     md: { width: 100, height: 40, tagline: false },
@@ -11,6 +14,7 @@ export function AriLogo({ size = "md", variant = "dark" }: AriLogoProps) {
     hero: { width: 240, height: 96, tagline: true },
   };
 
+  const t = getTranslations(language);
   const s = sizes[size];
   const color = variant === "light" ? "#FFFFFF" : "currentColor";
   const taglineColor = variant === "light" ? "rgba(255,255,255,0.85)" : "currentColor";
@@ -92,8 +96,8 @@ export function AriLogo({ size = "md", variant = "dark" }: AriLogoProps) {
             letterSpacing: "0.25em"
           }}
         >
-          <div>Adaptive Relationship</div>
-          <div>Intelligence</div>
+          <div>{t.tagline1}</div>
+          <div>{t.tagline2}</div>
         </div>
       )}
     </div>

@@ -4,21 +4,23 @@ import { ConversationView } from "@/components/ari/ConversationView";
 import { type Language } from "@/lib/i18n";
 
 const Index = () => {
-  const [session, setSession] = useState<{ userName: string; language: Language } | null>(null);
+  const [language, setLanguage] = useState<Language>("sv");
+  const [isStarted, setIsStarted] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const handleStart = (name: string, language: Language) => {
+  const handleStart = (selectedLanguage: Language) => {
     setIsTransitioning(true);
     
     setTimeout(() => {
-      setSession({ userName: name, language });
+      setLanguage(selectedLanguage);
+      setIsStarted(true);
     }, 350);
   };
 
-  if (session) {
+  if (isStarted) {
     return (
       <div className="ari-fade-in">
-        <ConversationView userName={session.userName} language={session.language} />
+        <ConversationView language={language} />
       </div>
     );
   }
@@ -29,7 +31,11 @@ const Index = () => {
         isTransitioning ? "opacity-0" : "opacity-100"
       }`}
     >
-      <StartView onStart={handleStart} />
+      <StartView 
+        onStart={handleStart} 
+        language={language}
+        onLanguageChange={setLanguage}
+      />
     </div>
   );
 };

@@ -2,112 +2,116 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 @layer base {
   :root {
-    /* ARI Design System - Cool, Calm, Professional */
+    /* ARI Design System - Nordic Tech, Slate Blue */
     
-    /* Core palette - cool neutrals */
-    --background: 210 20% 98%;
-    --foreground: 215 25% 20%;
+    /* Core palette - slate blue gradient feel */
+    --background: 215 30% 92%;
+    --foreground: 215 35% 18%;
     
-    /* Cards and surfaces */
-    --card: 210 15% 99%;
-    --card-foreground: 215 25% 20%;
+    /* Cards and surfaces - glassmorphism ready */
+    --card: 210 25% 97%;
+    --card-foreground: 215 35% 18%;
     
-    --popover: 210 15% 99%;
-    --popover-foreground: 215 25% 20%;
+    --popover: 210 25% 97%;
+    --popover-foreground: 215 35% 18%;
     
-    /* Primary - muted cool blue */
-    --primary: 210 30% 45%;
-    --primary-foreground: 210 20% 98%;
+    /* Primary - deep slate blue */
+    --primary: 215 35% 25%;
+    --primary-foreground: 210 25% 97%;
     
-    /* Secondary - cool gray */
-    --secondary: 210 12% 92%;
-    --secondary-foreground: 215 20% 30%;
+    /* Secondary - soft slate */
+    --secondary: 215 20% 88%;
+    --secondary-foreground: 215 30% 25%;
     
-    /* Muted - for subtle elements */
-    --muted: 210 15% 94%;
-    --muted-foreground: 215 15% 45%;
+    /* Muted - icy gray */
+    --muted: 215 18% 90%;
+    --muted-foreground: 215 20% 45%;
     
-    /* Accent - subtle blue-gray */
-    --accent: 210 18% 94%;
-    --accent-foreground: 210 25% 35%;
+    /* Accent - cool blue highlight */
+    --accent: 215 25% 85%;
+    --accent-foreground: 215 35% 22%;
     
     /* Destructive */
     --destructive: 0 40% 55%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: 210 25% 97%;
     
     /* Borders and inputs */
-    --border: 210 18% 90%;
-    --input: 210 15% 92%;
-    --ring: 210 25% 55%;
+    --border: 215 20% 85%;
+    --input: 215 18% 90%;
+    --ring: 215 30% 50%;
     
-    --radius: 0.5rem;
+    --radius: 0.625rem;
     
     /* ARI-specific tokens */
-    --ari-message-bg: 210 18% 96%;
-    --ari-message-text: 215 20% 35%;
+    --ari-message-bg: 215 22% 94%;
+    --ari-message-text: 215 25% 35%;
     --ari-user-bg: transparent;
-    --ari-user-text: 215 25% 20%;
+    --ari-user-text: 215 35% 18%;
     --ari-transition-slow: 450ms;
     --ari-transition-medium: 300ms;
     --ari-content-width: 800px;
+    --ari-gradient-start: 215 28% 88%;
+    --ari-gradient-end: 215 25% 94%;
     
     /* Sidebar */
-    --sidebar-background: 210 15% 97%;
-    --sidebar-foreground: 215 15% 30%;
-    --sidebar-primary: 210 25% 45%;
-    --sidebar-primary-foreground: 210 20% 98%;
-    --sidebar-accent: 210 12% 92%;
-    --sidebar-accent-foreground: 215 15% 30%;
-    --sidebar-border: 210 15% 90%;
-    --sidebar-ring: 210 25% 55%;
+    --sidebar-background: 215 22% 90%;
+    --sidebar-foreground: 215 25% 25%;
+    --sidebar-primary: 215 35% 25%;
+    --sidebar-primary-foreground: 210 25% 97%;
+    --sidebar-accent: 215 18% 88%;
+    --sidebar-accent-foreground: 215 25% 25%;
+    --sidebar-border: 215 18% 85%;
+    --sidebar-ring: 215 30% 50%;
   }
 
   .dark {
-    --background: 215 20% 8%;
-    --foreground: 210 15% 90%;
+    --background: 220 25% 8%;
+    --foreground: 215 20% 90%;
     
-    --card: 215 18% 10%;
-    --card-foreground: 210 15% 90%;
+    --card: 220 22% 12%;
+    --card-foreground: 215 20% 90%;
     
-    --popover: 215 18% 10%;
-    --popover-foreground: 210 15% 90%;
+    --popover: 220 22% 12%;
+    --popover-foreground: 215 20% 90%;
     
-    --primary: 210 30% 55%;
-    --primary-foreground: 215 20% 8%;
+    --primary: 215 35% 65%;
+    --primary-foreground: 220 25% 8%;
     
-    --secondary: 215 12% 18%;
-    --secondary-foreground: 210 12% 85%;
+    --secondary: 220 18% 18%;
+    --secondary-foreground: 215 18% 85%;
     
-    --muted: 215 12% 15%;
-    --muted-foreground: 210 10% 55%;
+    --muted: 220 18% 15%;
+    --muted-foreground: 215 15% 55%;
     
-    --accent: 210 12% 18%;
-    --accent-foreground: 210 20% 75%;
+    --accent: 215 20% 20%;
+    --accent-foreground: 215 25% 75%;
     
     --destructive: 0 35% 45%;
-    --destructive-foreground: 210 15% 90%;
+    --destructive-foreground: 215 20% 90%;
     
-    --border: 215 12% 18%;
-    --input: 215 12% 20%;
-    --ring: 210 25% 50%;
+    --border: 220 18% 18%;
+    --input: 220 18% 20%;
+    --ring: 215 30% 55%;
     
-    --ari-message-bg: 215 15% 12%;
-    --ari-message-text: 210 12% 70%;
+    --ari-message-bg: 220 20% 14%;
+    --ari-message-text: 215 18% 70%;
     --ari-user-bg: transparent;
-    --ari-user-text: 210 15% 90%;
+    --ari-user-text: 215 20% 90%;
+    --ari-gradient-start: 220 22% 10%;
+    --ari-gradient-end: 220 20% 12%;
     
-    --sidebar-background: 215 18% 7%;
-    --sidebar-foreground: 210 12% 85%;
-    --sidebar-primary: 210 30% 50%;
-    --sidebar-primary-foreground: 215 20% 8%;
-    --sidebar-accent: 215 12% 15%;
-    --sidebar-accent-foreground: 210 12% 85%;
-    --sidebar-border: 215 12% 15%;
-    --sidebar-ring: 210 25% 50%;
+    --sidebar-background: 220 22% 7%;
+    --sidebar-foreground: 215 18% 85%;
+    --sidebar-primary: 215 35% 60%;
+    --sidebar-primary-foreground: 220 25% 8%;
+    --sidebar-accent: 220 18% 15%;
+    --sidebar-accent-foreground: 215 18% 85%;
+    --sidebar-border: 220 18% 15%;
+    --sidebar-ring: 215 30% 55%;
   }
 }
 
@@ -125,16 +129,22 @@
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-feature-settings: "cv11", "ss01";
     font-variation-settings: "opsz" 32;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--ari-gradient-start)) 0%,
+      hsl(var(--ari-gradient-end)) 50%,
+      hsl(var(--ari-gradient-start)) 100%
+    );
+    min-height: 100vh;
   }
   
-  /* Custom selection color */
   ::selection {
-    background: hsl(210 30% 45% / 0.15);
+    background: hsl(215 30% 50% / 0.2);
   }
 }
 
 @layer components {
-  /* ARI animations - slow, intentional */
+  /* ARI animations */
   .ari-fade-in {
     animation: ariFadeIn var(--ari-transition-slow) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
   }
@@ -145,6 +155,27 @@
   
   .ari-presence {
     animation: ariPresence 4s ease-in-out infinite;
+  }
+  
+  /* Glassmorphism card */
+  .ari-glass {
+    background: hsl(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+  
+  /* Subtle wave pattern overlay */
+  .ari-wave-bg {
+    position: relative;
+  }
+  
+  .ari-wave-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23475569' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+    pointer-events: none;
   }
 }
 
@@ -170,9 +201,11 @@
 
 @keyframes ariPresence {
   0%, 100% {
-    opacity: 0.4;
+    opacity: 0.5;
+    transform: scale(1);
   }
   50% {
-    opacity: 0.8;
+    opacity: 1;
+    transform: scale(1.1);
   }
 }

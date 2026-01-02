@@ -12,7 +12,7 @@ export function Message({ content, sender, isNew = false }: MessageProps) {
   return (
     <div
       className={cn(
-        "py-6",
+        "py-5 border-b border-border/30 last:border-b-0",
         isNew && "ari-fade-up"
       )}
       style={{
@@ -21,9 +21,12 @@ export function Message({ content, sender, isNew = false }: MessageProps) {
       }}
     >
       {/* Sender label */}
-      <div className="mb-2">
+      <div className="mb-2 flex items-center gap-2">
+        {isAri && (
+          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+        )}
         <span className={cn(
-          "text-ari-small font-medium",
+          "text-ari-small font-medium tracking-wide",
           isAri ? "text-primary" : "text-muted-foreground"
         )}>
           {isAri ? "ARI" : "You"}

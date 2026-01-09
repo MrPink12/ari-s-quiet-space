@@ -121,13 +121,13 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
             
             {/* Video frame container */}
             <div className="relative ari-glass rounded-2xl p-1 shadow-xl">
-              {/* Inner frame with subtle border */}
-              <div className="relative rounded-xl overflow-hidden border border-white/20">
+            {/* Inner frame with subtle border - 16:9 aspect ratio */}
+              <div className="relative rounded-xl overflow-hidden border border-white/20 w-[480px] aspect-video">
                 {/* Avatar image */}
                 <img 
                   src={ariAvatar} 
                   alt="ARI" 
-                  className="w-80 h-auto object-cover"
+                  className="w-full h-full object-cover"
                 />
                 
                 {/* Live indicator overlay */}

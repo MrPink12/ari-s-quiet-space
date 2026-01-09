@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { AriLogo } from "./AriLogo";
 import { LanguageSelector } from "./LanguageSelector";
-import { VoiceButton } from "./VoiceButton";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
 
@@ -11,10 +13,13 @@ interface StartViewProps {
 }
 
 export function StartView({ onStart, language, onLanguageChange }: StartViewProps) {
+  const [name, setName] = useState("");
   const t = getTranslations(language);
 
   const handleStart = () => {
-    onStart(language);
+    if (name.trim()) {
+      onStart(language);
+    }
   };
 
   return (
@@ -47,16 +52,26 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
           </p>
         </div>
 
-        {/* Voice button to start */}
-        <div className="flex flex-col items-center gap-6">
-          <VoiceButton
-            isListening={false}
-            onClick={handleStart}
-            size="lg"
+        {/* Name input and start button */}
+        <div className="flex flex-col items-center gap-6 w-full max-w-xs">
+          <label className="text-ari-body text-foreground/90 font-medium">
+            Vad heter du?
+          </label>
+          <Input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Skriv ditt namn..."
+            className="text-center bg-white/10 border-white/30 text-foreground placeholder:text-muted-foreground/50"
           />
-          <p className="text-ari-small text-muted-foreground/70">
-            {t.tapToBegin}
-          </p>
+          <Button
+            onClick={handleStart}
+            disabled={!name.trim()}
+            className="w-full"
+            size="lg"
+          >
+            Start
+          </Button>
         </div>
 
         {/* Privacy note */}

@@ -29,7 +29,7 @@ export function Message({ content, sender, isNew = false, language = "en" }: Mes
           <div className="w-1.5 h-1.5 rounded-full bg-primary" />
         )}
         <span className={cn(
-          "text-ari-small font-medium tracking-wide",
+          "text-xs font-medium tracking-wide",
           isAri ? "text-primary" : "text-muted-foreground"
         )}>
           {isAri ? t.ariLabel : t.youLabel}
@@ -38,7 +38,7 @@ export function Message({ content, sender, isNew = false, language = "en" }: Mes
       
       {/* Message content */}
       <p className={cn(
-        "text-ari-body leading-relaxed whitespace-pre-wrap",
+        "text-sm leading-relaxed whitespace-pre-wrap",
         isAri ? "text-ari-message-text" : "text-ari-user-text"
       )}>
         {content}

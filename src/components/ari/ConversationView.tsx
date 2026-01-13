@@ -205,7 +205,7 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
           </div>
           
           {/* Chat messages */}
-          <div className="flex-1 min-h-[300px] ari-glass rounded-2xl p-4 border border-white/20">
+          <div className="flex-1 min-h-[300px] mt-24 ari-glass rounded-2xl p-4 border border-white/20">
             <div className="h-full max-h-[400px] overflow-y-auto pr-2">
               {messages.length === 0 ? (
                 <div className="h-full flex items-center justify-center text-muted-foreground/50 text-ari-small">

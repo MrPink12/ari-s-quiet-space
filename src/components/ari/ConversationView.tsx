@@ -4,8 +4,8 @@ import { AriLogo } from "./AriLogo";
 import { Message } from "./Message";
 import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
+import ariAvatar from "@/assets/ari-avatar.png";
 import { cn } from "@/lib/utils";
-
 type InputMode = "voice" | "text";
 
 interface ChatMessage {
@@ -175,37 +175,66 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
         </div>
       </header>
 
-      {/* Messages area */}
+      {/* Main content area */}
       <main className="flex-1 overflow-y-auto px-8 py-6">
-        <div className="max-w-ari-content mx-auto">
-          {messages.map((message) => (
-            <Message
-              key={message.id}
-              content={message.content}
-              sender={message.sender}
-              isNew={message.isNew}
-              language={language}
-            />
-          ))}
+        <div className="max-w-ari-content mx-auto flex flex-col">
           
-          {/* ARI typing indicator */}
-          {isAriTyping && (
-            <div className="py-5 ari-fade-up">
-              <div className="mb-2 flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                <span className="text-ari-small font-medium tracking-wide text-primary">
-                  {t.ariLabel}
-                </span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+          {/* ARI Avatar - Video frame */}
+          <div className="relative mb-6 ari-fade-up flex justify-center">
+            <div className="relative">
+              {/* Outer glow effect */}
+              <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-2xl blur-sm" />
+              
+              {/* Video frame container */}
+              <div className="relative ari-glass rounded-2xl p-1 shadow-xl">
+                <div className="relative rounded-xl overflow-hidden border border-white/20 w-[320px] aspect-video bg-black/20">
+                  <img 
+                    src={ariAvatar} 
+                    alt="ARI" 
+                    className="w-full h-full object-contain"
+                  />
+                  
+                  {/* LIVE indicator */}
+                  <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2 py-1 rounded-full bg-black/40 backdrop-blur-sm">
+                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    <span className="text-[10px] font-medium text-white/90 tracking-wider">LIVE</span>
+                  </div>
+                </div>
               </div>
             </div>
-          )}
+          </div>
           
-          <div ref={messagesEndRef} />
+          {/* Chat messages */}
+          <div className="flex-1">
+            {messages.map((message) => (
+              <Message
+                key={message.id}
+                content={message.content}
+                sender={message.sender}
+                isNew={message.isNew}
+                language={language}
+              />
+            ))}
+            
+            {/* ARI typing indicator */}
+            {isAriTyping && (
+              <div className="py-5 ari-fade-up">
+                <div className="mb-2 flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  <span className="text-ari-small font-medium tracking-wide text-primary">
+                    {t.ariLabel}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                </div>
+              </div>
+            )}
+            
+            <div ref={messagesEndRef} />
+          </div>
         </div>
       </main>
 

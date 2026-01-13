@@ -12,7 +12,7 @@ export const translations = {
     ariLabel: "ARI",
     youLabel: "Du",
     reflecting: "ARI reflekterar…",
-    listening: "ARI lyssnar…",
+    listening: "Lyssnar…",
     tapToSpeak: "Tryck för att tala",
     speaking: "Lyssnar…",
     ariSpeaking: "ARI talar…",
@@ -24,6 +24,13 @@ export const translations = {
       "Jag är här med dig. Ta den tid du behöver.",
       "Jag uppskattar att du litar på mig med det. Vad mer tänker du på?",
     ],
+    // New chat-related translations
+    typeMessage: "Skriv ett meddelande...",
+    send: "Skicka",
+    switchToText: "Byt till text",
+    switchToVoice: "Byt till röst",
+    startListening: "Börja lyssna",
+    stopListening: "Sluta lyssna",
   },
   en: {
     tagline1: "Adaptive Relationship",
@@ -36,7 +43,7 @@ export const translations = {
     ariLabel: "ARI",
     youLabel: "You",
     reflecting: "ARI is reflecting…",
-    listening: "ARI is listening…",
+    listening: "Listening…",
     tapToSpeak: "Tap to speak",
     speaking: "Listening…",
     ariSpeaking: "ARI is speaking…",
@@ -48,6 +55,13 @@ export const translations = {
       "I am here with you. Take whatever time you need.",
       "I appreciate you trusting me with that. What else is on your mind?",
     ],
+    // New chat-related translations
+    typeMessage: "Type a message...",
+    send: "Send",
+    switchToText: "Switch to text",
+    switchToVoice: "Switch to voice",
+    startListening: "Start listening",
+    stopListening: "Stop listening",
   },
 } as const;
 

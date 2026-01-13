@@ -205,35 +205,45 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
           </div>
           
           {/* Chat messages */}
-          <div className="flex-1">
-            {messages.map((message) => (
-              <Message
-                key={message.id}
-                content={message.content}
-                sender={message.sender}
-                isNew={message.isNew}
-                language={language}
-              />
-            ))}
-            
-            {/* ARI typing indicator */}
-            {isAriTyping && (
-              <div className="py-5 ari-fade-up">
-                <div className="mb-2 flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span className="text-ari-small font-medium tracking-wide text-primary">
-                    {t.ariLabel}
-                  </span>
+          <div className="flex-1 min-h-[300px] ari-glass rounded-2xl p-4 border border-white/20">
+            <div className="h-full max-h-[400px] overflow-y-auto pr-2">
+              {messages.length === 0 ? (
+                <div className="h-full flex items-center justify-center text-muted-foreground/50 text-ari-small">
+                  {language === "sv" ? "Chatt startar snart..." : "Chat starting soon..."}
                 </div>
-                <div className="flex items-center gap-1">
-                  <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
-                </div>
-              </div>
-            )}
-            
-            <div ref={messagesEndRef} />
+              ) : (
+                <>
+                  {messages.map((message) => (
+                    <Message
+                      key={message.id}
+                      content={message.content}
+                      sender={message.sender}
+                      isNew={message.isNew}
+                      language={language}
+                    />
+                  ))}
+                  
+                  {/* ARI typing indicator */}
+                  {isAriTyping && (
+                    <div className="py-5 ari-fade-up">
+                      <div className="mb-2 flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        <span className="text-ari-small font-medium tracking-wide text-primary">
+                          {t.ariLabel}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                        <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                        <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div ref={messagesEndRef} />
+                </>
+              )}
+            </div>
           </div>
         </div>
       </main>

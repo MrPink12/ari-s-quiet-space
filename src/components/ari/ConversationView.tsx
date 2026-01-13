@@ -187,7 +187,7 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
               
               {/* Video frame container */}
               <div className="relative ari-glass rounded-2xl p-1 shadow-xl">
-                <div className="relative rounded-xl overflow-hidden border border-white/20 w-[320px] aspect-video bg-black/20">
+                <div className="relative rounded-xl overflow-hidden border border-white/20 w-[420px] aspect-video bg-black/20">
                   <img 
                     src={ariAvatar} 
                     alt="ARI" 

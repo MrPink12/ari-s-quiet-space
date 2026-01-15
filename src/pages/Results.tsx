@@ -36,13 +36,10 @@ const Results = ({ language = "sv", userName = "Användare" }: ResultsProps) => 
         
         <div className="space-y-4 text-foreground/90">
           <p>
-            Du visar en stark förmåga att kommunicera öppet och lyssna aktivt på din partner.
+            Detta var en liten demo och utifrån de ämnen vi pratade om så tror jag att detta stämmer in på dig.
           </p>
           <p>
-            Dina svar indikerar att du värdesätter tillit och emotionell närhet i relationer.
-          </p>
-          <p>
-            Ett utvecklingsområde kan vara att bli mer bekväm med att uttrycka egna behov tydligare.
+            Ha en fin dag!
           </p>
         </div>
 

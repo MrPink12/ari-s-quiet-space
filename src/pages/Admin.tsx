@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Clock, MessageSquare, TrendingUp, Trash2 } from "lucide-react";
+import { ArrowLeft, Users, Clock, MessageSquare, TrendingUp, Trash2, Database, Brain, Server } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,13 +32,34 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-background p-6">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-8">
-        <Button variant="ghost" size="icon" asChild>
-          <Link to="/">
-            <ArrowLeft className="h-5 w-5" />
-          </Link>
-        </Button>
-        <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" size="icon" asChild>
+            <Link to="/">
+              <ArrowLeft className="h-5 w-5" />
+            </Link>
+          </Button>
+          <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+        </div>
+        
+        {/* Status Indicators */}
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 border">
+            <Server className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">Backend</span>
+            <span className="h-2 w-2 rounded-full bg-green-500"></span>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 border">
+            <Brain className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">LLM</span>
+            <span className="h-2 w-2 rounded-full bg-green-500"></span>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-muted/50 border">
+            <Database className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">Databas</span>
+            <span className="h-2 w-2 rounded-full bg-green-500"></span>
+          </div>
+        </div>
       </div>
 
       {/* Stats Cards */}
@@ -72,13 +93,13 @@ export default function Admin() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Meddelanden idag
+              Sessioner idag
             </CardTitle>
             <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">342</div>
-            <p className="text-xs text-muted-foreground">Från 28 sessioner</p>
+            <div className="text-2xl font-bold">28</div>
+            <p className="text-xs text-muted-foreground">342 frågor totalt</p>
           </CardContent>
         </Card>
 

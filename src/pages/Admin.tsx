@@ -50,24 +50,24 @@ export default function Admin() {
             </Link>
           </Button>
           <AriLogo size="sm" variant="light" language="sv" />
-          <h1 className="text-xl font-semibold text-foreground/90">Admin Dashboard</h1>
+          <h1 className="text-xl font-semibold text-foreground">Admin Dashboard</h1>
         </div>
         
         {/* Status Indicators */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full ari-glass">
-            <Server className="h-4 w-4 text-foreground/70" />
-            <span className="text-sm text-foreground/70">Backend</span>
+            <Server className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">Backend</span>
             <span className="h-2 w-2 rounded-full bg-green-500"></span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full ari-glass">
-            <Brain className="h-4 w-4 text-foreground/70" />
-            <span className="text-sm text-foreground/70">LLM</span>
+            <Brain className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">LLM</span>
             <span className="h-2 w-2 rounded-full bg-green-500"></span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full ari-glass">
-            <Database className="h-4 w-4 text-foreground/70" />
-            <span className="text-sm text-foreground/70">Databas</span>
+            <Database className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">Databas</span>
             <span className="h-2 w-2 rounded-full bg-green-500"></span>
           </div>
         </div>
@@ -77,53 +77,53 @@ export default function Admin() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <Card className="ari-glass border-white/20">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-foreground/70">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Totala sessioner
             </CardTitle>
-            <Users className="h-4 w-4 text-foreground/50" />
+            <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">127</div>
-            <p className="text-xs text-foreground/50">+12 denna vecka</p>
+            <p className="text-xs text-muted-foreground">+12 denna vecka</p>
           </CardContent>
         </Card>
 
         <Card className="ari-glass border-white/20">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-foreground/70">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Genomsnittlig tid
             </CardTitle>
-            <Clock className="h-4 w-4 text-foreground/50" />
+            <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">11 min</div>
-            <p className="text-xs text-foreground/50">Per session</p>
+            <p className="text-xs text-muted-foreground">Per session</p>
           </CardContent>
         </Card>
 
         <Card className="ari-glass border-white/20">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-foreground/70">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Sessioner idag
             </CardTitle>
-            <MessageSquare className="h-4 w-4 text-foreground/50" />
+            <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">28</div>
-            <p className="text-xs text-foreground/50">342 frågor totalt</p>
+            <p className="text-xs text-muted-foreground">342 frågor totalt</p>
           </CardContent>
         </Card>
 
         <Card className="ari-glass border-white/20">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-foreground/70">
+            <CardTitle className="text-sm font-medium text-muted-foreground">
               Avslutningsgrad
             </CardTitle>
-            <TrendingUp className="h-4 w-4 text-foreground/50" />
+            <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-foreground">92%</div>
-            <p className="text-xs text-foreground/50">Fullföljda sessioner</p>
+            <p className="text-xs text-muted-foreground">Fullföljda sessioner</p>
           </CardContent>
         </Card>
       </div>
@@ -131,17 +131,17 @@ export default function Admin() {
       {/* Sessions Table */}
       <Card className="mb-8 ari-glass border-white/20">
         <CardHeader>
-          <CardTitle className="text-foreground/90">Senaste sessioner</CardTitle>
+          <CardTitle className="text-foreground">Senaste sessioner</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow className="border-white/20">
-                <TableHead className="text-foreground/70">Användare</TableHead>
-                <TableHead className="text-foreground/70">Datum</TableHead>
-                <TableHead className="text-foreground/70">Längd</TableHead>
-                <TableHead className="text-foreground/70">Antal frågor</TableHead>
-                <TableHead className="text-foreground/70">Status</TableHead>
+                <TableHead className="text-muted-foreground">Användare</TableHead>
+                <TableHead className="text-muted-foreground">Datum</TableHead>
+                <TableHead className="text-muted-foreground">Längd</TableHead>
+                <TableHead className="text-muted-foreground">Antal frågor</TableHead>
+                <TableHead className="text-muted-foreground">Status</TableHead>
                 <TableHead className="w-[50px]"></TableHead>
               </TableRow>
             </TableHeader>
@@ -149,9 +149,9 @@ export default function Admin() {
               {mockSessions.map((session) => (
                 <TableRow key={session.id} className="border-white/10">
                   <TableCell className="font-medium text-foreground">{session.user}</TableCell>
-                  <TableCell className="text-foreground/80">{session.date}</TableCell>
-                  <TableCell className="text-foreground/80">{session.duration}</TableCell>
-                  <TableCell className="text-foreground/80">{session.questions}</TableCell>
+                  <TableCell className="text-muted-foreground">{session.date}</TableCell>
+                  <TableCell className="text-muted-foreground">{session.duration}</TableCell>
+                  <TableCell className="text-muted-foreground">{session.questions}</TableCell>
                   <TableCell>
                     <span
                       className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
@@ -167,7 +167,7 @@ export default function Admin() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-8 w-8 text-foreground/50 hover:text-destructive hover:bg-white/10"
+                      className="h-8 w-8 text-muted-foreground hover:text-destructive hover:bg-white/10"
                       onClick={() => console.log("Delete session", session.id)}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -183,7 +183,7 @@ export default function Admin() {
       {/* Logs */}
       <Card className="ari-glass border-white/20">
         <CardHeader>
-          <CardTitle className="text-foreground/90">Systemloggar</CardTitle>
+          <CardTitle className="text-foreground">Systemloggar</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-2 font-mono text-sm">
@@ -196,7 +196,7 @@ export default function Admin() {
                     : "bg-white/10"
                 }`}
               >
-                <span className="text-foreground/50">{log.time}</span>
+                <span className="text-muted-foreground">{log.time}</span>
                 <span
                   className={`uppercase text-xs font-bold ${
                     log.type === "warning" ? "text-yellow-600" : "text-blue-500"
@@ -204,7 +204,7 @@ export default function Admin() {
                 >
                   {log.type}
                 </span>
-                <span className="text-foreground/80">{log.message}</span>
+                <span className="text-foreground">{log.message}</span>
               </div>
             ))}
           </div>

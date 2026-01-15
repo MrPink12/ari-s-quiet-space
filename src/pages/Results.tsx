@@ -31,13 +31,9 @@ const Results = ({ language = "sv", userName = "Användare" }: ResultsProps) => 
       {/* Results Card */}
       <div className="ari-glass border border-white/20 rounded-2xl p-8 max-w-xl w-full text-center">
         
-        <div className="space-y-4 text-foreground/90 font-semibold">
-          <p>
-            Detta var en liten demo och utifrån de ämnen vi pratade om så tror jag att detta stämmer in på dig.
-          </p>
-          <p>
-            Ha en fin dag!
-          </p>
+        <div className="text-foreground/90 font-semibold text-center">
+          <p>Detta var en liten demo och utifrån de ämnen vi pratade om så tror jag att detta stämmer in på dig.</p>
+          <p className="mt-4">Ha en fin dag!</p>
         </div>
 
         <Button 

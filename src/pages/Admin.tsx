@@ -75,7 +75,7 @@ export default function Admin() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <Card className="ari-glass border-white/20">
+        <Card className="ari-glass border-white/20 bg-transparent">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Totala sessioner
@@ -88,7 +88,7 @@ export default function Admin() {
           </CardContent>
         </Card>
 
-        <Card className="ari-glass border-white/20">
+        <Card className="ari-glass border-white/20 bg-transparent">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Genomsnittlig tid
@@ -101,7 +101,7 @@ export default function Admin() {
           </CardContent>
         </Card>
 
-        <Card className="ari-glass border-white/20">
+        <Card className="ari-glass border-white/20 bg-transparent">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Sessioner idag
@@ -114,7 +114,7 @@ export default function Admin() {
           </CardContent>
         </Card>
 
-        <Card className="ari-glass border-white/20">
+        <Card className="ari-glass border-white/20 bg-transparent">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Avslutningsgrad
@@ -129,7 +129,7 @@ export default function Admin() {
       </div>
 
       {/* Sessions Table */}
-      <Card className="mb-8 ari-glass border-white/20">
+      <Card className="mb-8 ari-glass border-white/20 bg-transparent">
         <CardHeader>
           <CardTitle className="text-foreground">Senaste sessioner</CardTitle>
         </CardHeader>
@@ -181,7 +181,7 @@ export default function Admin() {
       </Card>
 
       {/* Logs */}
-      <Card className="ari-glass border-white/20">
+      <Card className="ari-glass border-white/20 bg-transparent">
         <CardHeader>
           <CardTitle className="text-foreground">Systemloggar</CardTitle>
         </CardHeader>

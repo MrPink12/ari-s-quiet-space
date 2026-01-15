@@ -1,4 +1,4 @@
-import { ArrowLeft, Users, Clock, MessageSquare, TrendingUp } from "lucide-react";
+import { ArrowLeft, Users, Clock, MessageSquare, TrendingUp, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,11 +13,11 @@ import {
 
 // Mock data - later this will come from a database
 const mockSessions = [
-  { id: 1, user: "Anna", date: "2026-01-15", duration: "12 min", messages: 24, status: "Avslutad" },
-  { id: 2, user: "Erik", date: "2026-01-15", duration: "8 min", messages: 16, status: "Avslutad" },
-  { id: 3, user: "Maria", date: "2026-01-14", duration: "15 min", messages: 32, status: "Avslutad" },
-  { id: 4, user: "Johan", date: "2026-01-14", duration: "5 min", messages: 10, status: "Avbruten" },
-  { id: 5, user: "Lisa", date: "2026-01-13", duration: "20 min", messages: 45, status: "Avslutad" },
+  { id: 1, user: "Anna", date: "2026-01-15", duration: "12 min", questions: 24, status: "Avslutad" },
+  { id: 2, user: "Erik", date: "2026-01-15", duration: "8 min", questions: 16, status: "Avslutad" },
+  { id: 3, user: "Maria", date: "2026-01-14", duration: "15 min", questions: 32, status: "Avslutad" },
+  { id: 4, user: "Johan", date: "2026-01-14", duration: "5 min", questions: 10, status: "Avbruten" },
+  { id: 5, user: "Lisa", date: "2026-01-13", duration: "20 min", questions: 45, status: "Avslutad" },
 ];
 
 const mockLogs = [
@@ -108,8 +108,9 @@ export default function Admin() {
                 <TableHead>Användare</TableHead>
                 <TableHead>Datum</TableHead>
                 <TableHead>Längd</TableHead>
-                <TableHead>Meddelanden</TableHead>
+                <TableHead>Antal frågor</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead className="w-[50px]"></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -118,7 +119,7 @@ export default function Admin() {
                   <TableCell className="font-medium">{session.user}</TableCell>
                   <TableCell>{session.date}</TableCell>
                   <TableCell>{session.duration}</TableCell>
-                  <TableCell>{session.messages}</TableCell>
+                  <TableCell>{session.questions}</TableCell>
                   <TableCell>
                     <span
                       className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
@@ -129,6 +130,16 @@ export default function Admin() {
                     >
                       {session.status}
                     </span>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                      onClick={() => console.log("Delete session", session.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

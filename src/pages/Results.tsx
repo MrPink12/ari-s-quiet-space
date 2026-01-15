@@ -30,9 +30,6 @@ const Results = ({ language = "sv", userName = "Användare" }: ResultsProps) => 
 
       {/* Results Card */}
       <div className="ari-glass border border-white/20 rounded-2xl p-8 max-w-xl w-full text-center">
-        <h2 className="text-xl font-semibold text-foreground mb-6">
-          Detta tror jag stämmer med din personlighet
-        </h2>
         
         <div className="space-y-4 text-foreground/90">
           <p>

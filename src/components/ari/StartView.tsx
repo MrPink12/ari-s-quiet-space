@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Settings } from "lucide-react";
 import { AriLogo } from "./AriLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { Button } from "@/components/ui/button";
@@ -31,9 +33,14 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
         backgroundPosition: 'center',
       }}
     >
-      {/* Language selector in corner */}
-      <div className="absolute top-6 right-8 z-20">
+      {/* Top right controls */}
+      <div className="absolute top-6 right-8 z-20 flex items-center gap-3">
         <LanguageSelector value={language} onChange={onLanguageChange} />
+        <Button variant="ghost" size="icon" asChild className="text-foreground/70 hover:text-foreground hover:bg-white/10">
+          <Link to="/admin">
+            <Settings className="h-5 w-5" />
+          </Link>
+        </Button>
       </div>
 
       <div className="w-full max-w-ari-narrow ari-fade-up relative z-10 flex flex-col items-center">

@@ -4,7 +4,7 @@ import { AriLogo } from "./AriLogo";
 import { Message } from "./Message";
 import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
-import ariAvatar from "@/assets/ari-avatar.png";
+import ariAvatarVideo from "@/assets/ari-avatar-video.mp4";
 import { cn } from "@/lib/utils";
 type InputMode = "voice" | "text";
 
@@ -188,10 +188,13 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
               {/* Video frame container */}
               <div className="relative ari-glass rounded-2xl p-1 shadow-xl">
                 <div className="relative rounded-xl overflow-hidden border border-white/20 w-[420px] aspect-video bg-black/20">
-                  <img 
-                    src={ariAvatar} 
-                    alt="ARI" 
-                    className="w-full h-full object-contain"
+                  <video 
+                    src={ariAvatarVideo} 
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
                   />
                   
                   {/* LIVE indicator */}

@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ariBackground from "@/assets/ari-background.jpg";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -15,9 +16,16 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen ari-background flex flex-col items-center justify-center p-6">
+    <div 
+      className="min-h-screen flex flex-col items-center justify-center p-6"
+      style={{
+        backgroundImage: `url(${ariBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <div className="flex flex-col items-center gap-8">
-        <AriLogo />
+        <AriLogo size="hero" variant="light" language="sv" />
         
         <form onSubmit={handleSubmit} className="w-full max-w-xs space-y-4">
           <Input
@@ -25,9 +33,9 @@ const Login = () => {
             placeholder="Lösenord"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="bg-white/10 border-white/20 text-foreground placeholder:text-foreground/50 text-center"
+            className="bg-white/10 border-white/30 text-foreground placeholder:text-muted-foreground/50 text-center"
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" size="lg">
             Logga in
           </Button>
         </form>

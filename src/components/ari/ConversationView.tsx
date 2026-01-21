@@ -7,6 +7,7 @@ import ariBackground from "@/assets/ari-background.jpg";
 import ariAvatarVideo from "@/assets/ari-avatar-video.mp4";
 import { cn } from "@/lib/utils";
 type InputMode = "voice" | "text";
+type ConversationMode = "text-text" | "text-tal" | "tal-tal";
 
 interface ChatMessage {
   id: string;
@@ -18,9 +19,10 @@ interface ChatMessage {
 interface ConversationViewProps {
   language: Language;
   onBack?: () => void;
+  mode?: ConversationMode;
 }
 
-export function ConversationView({ language, onBack }: ConversationViewProps) {
+export function ConversationView({ language, onBack, mode = "text-text" }: ConversationViewProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMode, setInputMode] = useState<InputMode>("voice");
   const [textInput, setTextInput] = useState("");
@@ -177,11 +179,11 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
 
       {/* Main content area */}
       <main className="flex-1 overflow-y-auto px-8 py-6">
-        <div className="max-w-ari-content mx-auto flex flex-col">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row lg:gap-8 lg:items-start">
           
-          {/* ARI Avatar - Video frame */}
-          <div className="relative mb-6 ari-fade-up flex justify-center">
-            <div className="relative">
+          {/* ARI Avatar - Video frame (hidden on mobile) */}
+          <div className="hidden lg:block relative ari-fade-up flex-shrink-0">
+            <div className="relative sticky top-6">
               {/* Outer glow effect */}
               <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 via-primary/10 to-transparent rounded-2xl blur-sm" />
               
@@ -194,7 +196,7 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
                     loop
                     muted
                     playsInline
-                    className="max-w-[420px] max-h-[500px] w-auto h-auto"
+                    className="w-[380px] h-auto"
                   />
                   
                   {/* LIVE indicator */}
@@ -208,8 +210,8 @@ export function ConversationView({ language, onBack }: ConversationViewProps) {
           </div>
           
           {/* Chat messages */}
-          <div className="flex-1 min-h-[300px] mt-24 ari-glass rounded-2xl p-4 border border-white/20">
-            <div className="h-full max-h-[400px] overflow-y-auto pr-2">
+          <div className="flex-1 min-h-[400px] lg:min-h-[500px] ari-glass rounded-2xl p-4 border border-white/20">
+            <div className="h-full max-h-[500px] overflow-y-auto pr-2">
               {messages.length === 0 ? (
                 <div className="h-full flex items-center justify-center text-muted-foreground/50 text-ari-small">
                   {language === "sv" ? "Chatt startar snart..." : "Chat starting soon..."}

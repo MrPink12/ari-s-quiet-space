@@ -71,14 +71,34 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
             placeholder="Skriv ditt namn..."
             className="text-center bg-white/10 border-white/30 text-foreground placeholder:text-muted-foreground/50"
           />
-          <Button
-            onClick={handleStart}
-            disabled={!name.trim()}
-            className="w-full"
-            size="lg"
-          >
-            Start
-          </Button>
+          <div className="flex flex-col gap-3 w-full">
+            <Button
+              onClick={handleStart}
+              disabled={!name.trim()}
+              className="w-full"
+              size="lg"
+            >
+              Text - Text
+            </Button>
+            <Button
+              onClick={handleStart}
+              disabled={!name.trim()}
+              className="w-full"
+              size="lg"
+              variant="secondary"
+            >
+              Text - Tal
+            </Button>
+            <Button
+              onClick={handleStart}
+              disabled={!name.trim()}
+              className="w-full"
+              size="lg"
+              variant="outline"
+            >
+              Tal - Tal
+            </Button>
+          </div>
         </div>
 
         {/* Privacy note */}

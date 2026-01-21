@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Settings } from "lucide-react";
 import { AriLogo } from "./AriLogo";
 import { LanguageSelector } from "./LanguageSelector";
@@ -10,19 +10,24 @@ import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
 
 interface StartViewProps {
-  onStart: (language: Language) => void;
   language: Language;
   onLanguageChange: (lang: Language) => void;
 }
 
-export function StartView({ onStart, language, onLanguageChange }: StartViewProps) {
+export function StartView({ language, onLanguageChange }: StartViewProps) {
   const [name, setName] = useState("");
   const [mode, setMode] = useState<"text-text" | "text-tal" | "tal-tal">("text-text");
+  const navigate = useNavigate();
   const t = getTranslations(language);
 
   const handleStart = () => {
     if (name.trim()) {
-      onStart(language);
+      const routes = {
+        "text-text": "/text-text",
+        "text-tal": "/text-tal",
+        "tal-tal": "/tal-tal",
+      };
+      navigate(routes[mode], { state: { language, name } });
     }
   };
 

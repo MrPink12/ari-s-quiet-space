@@ -256,8 +256,8 @@ export function ConversationView({ language, onBack, mode = "text-text" }: Conve
       {/* Input area */}
       <footer className="flex-shrink-0 ari-glass border-t border-white/20 px-8 py-4">
         <div className="max-w-ari-content mx-auto">
-          {/* Voice transcription display */}
-          {inputMode === "voice" && isListening && transcribedText && (
+          {/* Voice transcription display - only for voice modes */}
+          {mode !== "text-text" && inputMode === "voice" && isListening && transcribedText && (
             <div className="mb-3 p-3 rounded-lg bg-white/10 border border-white/20">
               <p className="text-ari-small text-muted-foreground mb-1">{t.youLabel}:</p>
               <p className="text-ari-body text-foreground">{transcribedText}</p>
@@ -265,21 +265,50 @@ export function ConversationView({ language, onBack, mode = "text-text" }: Conve
           )}
           
           <div className="flex items-end gap-3">
-            {/* Mode toggle button */}
-            <button
-              onClick={toggleInputMode}
-              className="p-3 rounded-full hover:bg-white/10 transition-colors duration-300 flex-shrink-0"
-              aria-label={inputMode === "voice" ? t.switchToText : t.switchToVoice}
-            >
-              {inputMode === "voice" ? (
-                <Keyboard className="w-5 h-5 text-foreground/70" />
-              ) : (
-                <Mic className="w-5 h-5 text-foreground/70" />
-              )}
-            </button>
+            {/* Mode toggle button - only show for modes that support both */}
+            {mode !== "text-text" && (
+              <button
+                onClick={toggleInputMode}
+                className="p-3 rounded-full hover:bg-white/10 transition-colors duration-300 flex-shrink-0"
+                aria-label={inputMode === "voice" ? t.switchToText : t.switchToVoice}
+              >
+                {inputMode === "voice" ? (
+                  <Keyboard className="w-5 h-5 text-foreground/70" />
+                ) : (
+                  <Mic className="w-5 h-5 text-foreground/70" />
+                )}
+              </button>
+            )}
 
-            {inputMode === "text" ? (
-              /* Text input */
+            {/* Text-text mode: always show text input */}
+            {mode === "text-text" ? (
+              <div className="flex-1 flex items-end gap-3">
+                <textarea
+                  ref={textareaRef}
+                  value={textInput}
+                  onChange={handleTextareaChange}
+                  onKeyDown={handleKeyDown}
+                  placeholder={t.typeMessage}
+                  rows={1}
+                  className="flex-1 resize-none bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/50 text-ari-body"
+                  style={{ maxHeight: "120px" }}
+                />
+                <button
+                  onClick={handleSendText}
+                  disabled={!textInput.trim()}
+                  className={cn(
+                    "p-3 rounded-full transition-all duration-300 flex-shrink-0",
+                    textInput.trim()
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                      : "bg-white/10 text-muted-foreground/50 cursor-not-allowed"
+                  )}
+                  aria-label={t.send}
+                >
+                  <Send className="w-5 h-5" />
+                </button>
+              </div>
+            ) : inputMode === "text" ? (
+              /* Text input for other modes */
               <div className="flex-1 flex items-end gap-3">
                 <textarea
                   ref={textareaRef}

@@ -5,6 +5,7 @@ import { AriLogo } from "./AriLogo";
 import { LanguageSelector } from "./LanguageSelector";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { type Language, getTranslations } from "@/lib/i18n";
 import ariBackground from "@/assets/ari-background.jpg";
 
@@ -16,6 +17,7 @@ interface StartViewProps {
 
 export function StartView({ onStart, language, onLanguageChange }: StartViewProps) {
   const [name, setName] = useState("");
+  const [mode, setMode] = useState<"text-text" | "text-tal" | "tal-tal">("text-text");
   const t = getTranslations(language);
 
   const handleStart = () => {
@@ -59,8 +61,8 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
           </p>
         </div>
 
-        {/* Name input and start button */}
-        <div className="flex flex-col items-center gap-6 w-full max-w-xs">
+        {/* Name input and mode selection */}
+        <div className="flex flex-col items-center gap-6 w-full max-w-md">
           <label className="text-ari-body text-foreground/90 font-medium">
             Vad heter du?
           </label>
@@ -69,36 +71,36 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Skriv ditt namn..."
-            className="text-center bg-white/10 border-white/30 text-foreground placeholder:text-muted-foreground/50"
+            className="text-center bg-white/10 border-white/30 text-foreground placeholder:text-muted-foreground/50 max-w-xs"
           />
-          <div className="flex flex-col gap-3 w-full">
-            <Button
-              onClick={handleStart}
-              disabled={!name.trim()}
-              className="w-full"
-              size="lg"
-            >
-              Start Text - Text
-            </Button>
-            <Button
-              onClick={handleStart}
-              disabled={!name.trim()}
-              className="w-full"
-              size="lg"
-              variant="secondary"
-            >
-              Start Text - Tal
-            </Button>
-            <Button
-              onClick={handleStart}
-              disabled={!name.trim()}
-              className="w-full"
-              size="lg"
-              variant="outline"
-            >
-              Start Tal - Tal
-            </Button>
-          </div>
+          
+          {/* Mode selection radio buttons */}
+          <RadioGroup 
+            value={mode} 
+            onValueChange={(value) => setMode(value as "text-text" | "text-tal" | "tal-tal")}
+            className="flex flex-row gap-6"
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="text-text" id="text-text" className="border-white/50 text-white" />
+              <label htmlFor="text-text" className="text-sm text-foreground/90 cursor-pointer">Text - Text</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="text-tal" id="text-tal" className="border-white/50 text-white" />
+              <label htmlFor="text-tal" className="text-sm text-foreground/90 cursor-pointer">Text - Tal</label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="tal-tal" id="tal-tal" className="border-white/50 text-white" />
+              <label htmlFor="tal-tal" className="text-sm text-foreground/90 cursor-pointer">Tal - Tal</label>
+            </div>
+          </RadioGroup>
+
+          <Button
+            onClick={handleStart}
+            disabled={!name.trim()}
+            size="lg"
+          >
+            Starta
+          </Button>
         </div>
 
         {/* Privacy note */}

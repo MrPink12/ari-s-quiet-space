@@ -78,7 +78,7 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
               className="w-full"
               size="lg"
             >
-              Text - Text
+              Start Text - Text
             </Button>
             <Button
               onClick={handleStart}
@@ -87,7 +87,7 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
               size="lg"
               variant="secondary"
             >
-              Text - Tal
+              Start Text - Tal
             </Button>
             <Button
               onClick={handleStart}
@@ -96,7 +96,7 @@ export function StartView({ onStart, language, onLanguageChange }: StartViewProp
               size="lg"
               variant="outline"
             >
-              Tal - Tal
+              Start Tal - Tal
             </Button>
           </div>
         </div>

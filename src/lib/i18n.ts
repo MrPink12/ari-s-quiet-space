@@ -2,8 +2,8 @@ export type Language = "sv" | "en";
 
 export const translations = {
   sv: {
-    tagline1: "Adaptiv Relations",
-    tagline2: "Intelligens",
+    tagline1: "Adaptive Relationship",
+    tagline2: "Intelligence",
     heading: "Ett rum för reflektion.",
     subheading: "Ta den tid du behöver. Det finns ingen brådska här.",
     tapToBegin: "Tryck för att börja",
